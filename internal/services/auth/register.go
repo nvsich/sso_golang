@@ -25,7 +25,7 @@ func (auth *Auth) Register(ctx context.Context, email, password string) (int64, 
 		return 0, fmt.Errorf("%s: %w", op, err)
 	}
 
-	userID, err := auth.userSaver.SaveUser(ctx, email, passHash)
+	userID, err := auth.userRepo.SaveUser(ctx, email, passHash)
 	if err != nil {
 		if errors.Is(err, storage.ErrUserExists) {
 			log.Info("user exists", err)

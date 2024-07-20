@@ -18,7 +18,7 @@ func (auth *Auth) IsAdmin(ctx context.Context, userID int64) (bool, error) {
 
 	log.Info("checking if user is admin")
 
-	isAdmin, err := auth.userProvider.IsAdmin(ctx, userID)
+	isAdmin, err := auth.adminRepo.IsAdmin(ctx, userID)
 
 	if err != nil {
 		if errors.Is(err, storage.ErrAppNotFound) {

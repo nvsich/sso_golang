@@ -20,7 +20,7 @@ func (auth *Auth) Login(ctx context.Context, email, password string, appID int64
 
 	log.Info("attempting to login")
 
-	user, err := auth.userProvider.User(ctx, email)
+	user, err := auth.userRepo.User(ctx, email)
 	if err != nil {
 		if errors.Is(err, storage.ErrUserNotFound) {
 			auth.log.Info("user not found", err)
@@ -36,7 +36,7 @@ func (auth *Auth) Login(ctx context.Context, email, password string, appID int64
 		return "", fmt.Errorf("%s: %w", op, ErrInvalidCredentials)
 	}
 
-	app, err := auth.appProvider.App(ctx, appID)
+	app, err := auth.appRepo.App(ctx, appID)
 	if err != nil {
 		if errors.Is(err, storage.ErrAppNotFound) {
 			auth.log.Info("app not found", err)

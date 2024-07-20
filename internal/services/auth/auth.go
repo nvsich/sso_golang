@@ -9,39 +9,40 @@ import (
 )
 
 type Auth struct {
-	log          *slog.Logger
-	userSaver    UserSaver
-	userProvider UserProvider
-	appProvider  AppProvider
-	tokenTTL     time.Duration
+	log       *slog.Logger
+	userRepo  UserRepo
+	adminRepo AdminRepo
+	appRepo   AppRepo
+	tokenTTL  time.Duration
 }
 
-type UserSaver interface {
+type UserRepo interface {
 	SaveUser(ctx context.Context, email string, passHash []byte) (int64, error)
+
+	User(ctx context.Context, email string) (models.User, error)
 }
 
-type UserProvider interface {
-	User(ctx context.Context, email string) (models.User, error)
+type AdminRepo interface {
 	IsAdmin(ctx context.Context, userID int64) (bool, error)
 }
 
-type AppProvider interface {
+type AppRepo interface {
 	App(ctx context.Context, appId int64) (models.App, error)
 }
 
 func New(
 	log *slog.Logger,
-	userSaver UserSaver,
-	userProvider UserProvider,
-	appProvider AppProvider,
+	userRepo UserRepo,
+	adminRepo AdminRepo,
+	appRepo AppRepo,
 	tokenTTL time.Duration,
 ) *Auth {
 	return &Auth{
-		log:          log,
-		userSaver:    userSaver,
-		userProvider: userProvider,
-		appProvider:  appProvider,
-		tokenTTL:     tokenTTL,
+		log:       log,
+		userRepo:  userRepo,
+		adminRepo: adminRepo,
+		appRepo:   appRepo,
+		tokenTTL:  tokenTTL,
 	}
 }
 
