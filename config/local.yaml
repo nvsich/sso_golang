@@ -1,0 +1,11 @@
+env: "local"
+token_ttl: 1h
+postgres:
+  POSTGRES_DB: postgres
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: password
+  POSTGRES_HOST: localhost
+  POSTGRES_PORT: 5432
+grpc:
+  port: 44044
+  timeout: 5s
