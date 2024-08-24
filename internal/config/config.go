@@ -8,18 +8,10 @@ import (
 )
 
 type Config struct {
-	Env      string         `yaml:"env" env-required:"true"`
-	Postgres PostgresConfig `yaml:"postgres" env-required:"true"`
-	TokenTTL time.Duration  `yaml:"token_ttl" env-required:"true"`
-	GRPC     GRPCConfig     `yaml:"grpc" env-required:"true"`
-}
-
-type PostgresConfig struct {
-	DB       string `yaml:"POSTGRES_DB" env-required:"true"`
-	User     string `yaml:"POSTGRES_USER" env-required:"true"`
-	Password string `yaml:"POSTGRES_PASSWORD" env-required:"true"`
-	Host     string `yaml:"POSTGRES_HOST" env-required:"true"`
-	Port     int    `yaml:"POSTGRES_PORT" env-required:"true"`
+	Env         string        `yaml:"env" env-required:"true"`
+	StoragePath string        `yaml:"storage_path" env-required:"true"`
+	TokenTTL    time.Duration `yaml:"token_ttl" env-required:"true"`
+	GRPC        GRPCConfig    `yaml:"grpc" env-required:"true"`
 }
 
 type GRPCConfig struct {

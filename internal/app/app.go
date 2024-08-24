@@ -3,7 +3,6 @@ package app
 import (
 	"log/slog"
 	grpcapp "sso/internal/app/grpc"
-	"sso/internal/config"
 	"time"
 )
 
@@ -14,7 +13,7 @@ type App struct {
 func New(
 	log *slog.Logger,
 	port int,
-	postgres config.PostgresConfig,
+	storagePath string,
 	tokenTTL time.Duration,
 ) *App {
 	// TODO: init storage

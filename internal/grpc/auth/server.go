@@ -6,22 +6,35 @@ import (
 	"google.golang.org/grpc"
 )
 
+type Auth interface {
+	Login(
+		context context.Context,
+		email string,
+		password string,
+		appId int,
+	) (token string, err error)
+
+	Register(
+		context context.Context,
+		email string,
+		password string,
+	) (userId int64, err error)
+
+	IsAdmin(
+		context context.Context,
+		userId int64,
+	) (isAdmin bool, err error)
+}
+
 type serverAPI struct {
 	ssov1.UnimplementedAuthServer
+	auth Auth
 }
 
-func Register(gRPC *grpc.Server) {
-	ssov1.RegisterAuthServer(gRPC, &serverAPI{})
+func Register(gRPC *grpc.Server, auth Auth) {
+	ssov1.RegisterAuthServer(gRPC, &serverAPI{auth: auth})
 }
 
-func (s *serverAPI) Login(ctx context.Context, in *ssov1.LoginRequest) (*ssov1.LoginResponse, error) {
-	return &ssov1.LoginResponse{Token: "1234"}, nil
-}
-
-func (s *serverAPI) Register(ctx context.Context, in *ssov1.RegisterRequest) (*ssov1.RegisterResponse, error) {
-	panic("implement me")
-}
-
-func (s *serverAPI) IsAdmin(ctx context.Context, in *ssov1.IsAdminRequest) (*ssov1.IsAdminResponse, error) {
-	panic("implement me")
-}
+const (
+	emptyValue = 0
+)
