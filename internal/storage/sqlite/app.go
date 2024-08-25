@@ -13,7 +13,7 @@ var (
 	getAppQuery = `select id, name, secret from apps where id = ?`
 )
 
-func (storage *Storage) App(ctx context.Context, appID int64) (models.App, error) {
+func (storage *Storage) App(ctx context.Context, appID int) (models.App, error) {
 	const op = "storage.sqlite.App"
 
 	prepare, err := storage.db.Prepare(getAppQuery)
