@@ -7,6 +7,9 @@ require github.com/ilyakaznacheev/cleanenv v1.5.0
 require (
 	github.com/BurntSushi/toml v1.2.1 // indirect
 	github.com/golang-jwt/jwt/v5 v5.2.1 // indirect
+	github.com/golang-migrate/migrate/v4 v4.17.1 // indirect
+	github.com/hashicorp/errwrap v1.1.0 // indirect
+	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
 	github.com/jackc/pgconn v1.14.3 // indirect
 	github.com/jackc/pgio v1.0.0 // indirect
@@ -18,6 +21,7 @@ require (
 	github.com/jackc/puddle v1.3.0 // indirect
 	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/nvsich/sso_protos v0.0.4 // indirect
+	go.uber.org/atomic v1.7.0 // indirect
 	golang.org/x/crypto v0.26.0 // indirect
 	golang.org/x/net v0.25.0 // indirect
 	golang.org/x/sys v0.23.0 // indirect
