@@ -12,7 +12,7 @@ var (
 	saveUserQuery = `insert into users(email, pass_hash) values (?, ?)`
 )
 
-func (storage *Storage) SaveUser(ctx context.Context, email, passHash []byte) (int64, error) {
+func (storage *Storage) SaveUser(ctx context.Context, email string, passHash []byte) (int64, error) {
 	const op = "storage.sqlite.SaveUser"
 	prepare, err := storage.db.Prepare(saveUserQuery)
 	if err != nil {
